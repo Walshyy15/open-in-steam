@@ -1,0 +1,203 @@
+/**
+ * Open in Steam - Button Styles
+ *
+ * Steam-native styling with two modes:
+ * 1. Inline mode: Button sits in the header navigation
+ * 2. Fixed mode: Button floats at top-right (fallback)
+ *
+ * Works on both store.steampowered.com and steamcommunity.com pages.
+ */
+
+/* =============================================================================
+   MAIN BUTTON STYLES
+   ============================================================================= */
+
+.ois-steam-button {
+    /* Reset */
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+
+    /* Layout */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    /* Sizing */
+    padding: 8px 16px;
+    margin-right: 12px;
+    height: 32px;
+
+    /* Steam green gradient background */
+    background: linear-gradient(135deg, #799905 0%, #536904 100%);
+    border-radius: 4px;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    /* Typography */
+    font-family: "Motiva Sans", Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #d2efa9;
+    text-decoration: none;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+
+    /* Interaction */
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    /* Ensure visibility */
+    position: relative;
+    z-index: 100;
+}
+
+/* Hover state - brighter & glowing */
+.ois-steam-button:hover {
+    background: linear-gradient(135deg, #a4d007 0%, #799905 100%);
+    color: #ffffff;
+    box-shadow:
+        0 4px 12px rgba(121, 153, 5, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Active/pressed state */
+.ois-steam-button:active,
+.ois-steam-button.ois-clicked {
+    background: linear-gradient(135deg, #536904 0%, #3d4c03 100%);
+    transform: translateY(1px);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.4),
+        inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus state for accessibility */
+.ois-steam-button:focus-visible {
+    outline: 2px solid #66c0f4;
+    outline-offset: 2px;
+}
+
+/* =============================================================================
+   FIXED POSITION MODE (Fallback)
+   ============================================================================= */
+
+.ois-steam-button.ois-fixed {
+    position: fixed !important;
+    top: 16px;
+    right: 16px;
+    z-index: 999999 !important;
+    margin: 0;
+
+    /* Enhanced shadow for floating effect */
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.ois-steam-button.ois-fixed:hover {
+    box-shadow:
+        0 6px 20px rgba(121, 153, 5, 0.5),
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* =============================================================================
+   ICON STYLES
+   ============================================================================= */
+
+.ois-steam-button .ois-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    fill: currentColor;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+.ois-steam-button:hover .ois-icon {
+    opacity: 1;
+}
+
+/* =============================================================================
+   TEXT STYLES
+   ============================================================================= */
+
+.ois-steam-button .ois-text {
+    display: inline-block;
+}
+
+/* =============================================================================
+   WORKSHOP / COMMUNITY PAGE ADJUSTMENTS
+   ============================================================================= */
+
+/* When injected into the workshop item header, add some vertical margin */
+.workshopItemDetailsHeader>.ois-steam-button,
+.workshopItemTitle>.ois-steam-button {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+/* When injected into breadcrumbs, sit inline */
+.breadcrumbs>.ois-steam-button {
+    margin-left: 12px;
+    vertical-align: middle;
+}
+
+/* =============================================================================
+   RESPONSIVE - Icon only on small screens
+   ============================================================================= */
+
+@media (max-width: 768px) {
+    .ois-steam-button .ois-text {
+        display: none;
+    }
+
+    .ois-steam-button {
+        padding: 8px;
+        min-width: 32px;
+    }
+
+    .ois-steam-button.ois-fixed {
+        top: 12px;
+        right: 12px;
+    }
+}
+
+/* =============================================================================
+   CLICK ANIMATION
+   ============================================================================= */
+
+@keyframes ois-pulse {
+    0% {
+        box-shadow:
+            0 2px 4px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            0 0 0 0 rgba(164, 208, 7, 0.7);
+    }
+
+    50% {
+        box-shadow:
+            0 2px 4px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            0 0 0 10px rgba(164, 208, 7, 0);
+    }
+
+    100% {
+        box-shadow:
+            0 2px 4px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            0 0 0 0 rgba(164, 208, 7, 0);
+    }
+}
+
+.ois-steam-button.ois-clicked {
+    animation: ois-pulse 0.3s ease-out;
+}

@@ -1,0 +1,47 @@
+{
+    "manifest_version": 3,
+    "name": "Open in Steam",
+    "version": "1.2.0",
+    "description": "Adds an 'Open in Steam' button on Steam Store and Community pages to launch them directly in the Steam desktop client.",
+    "permissions": [
+        "activeTab"
+    ],
+    "host_permissions": [
+        "https://store.steampowered.com/*",
+        "https://steamcommunity.com/*"
+    ],
+    "action": {
+        "default_title": "Open in Steam Client",
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "32": "icons/icon32.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        }
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://store.steampowered.com/*",
+                "*://steamcommunity.com/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "content.css"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "icons": {
+        "16": "icons/icon16.png",
+        "32": "icons/icon32.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "minimum_chrome_version": "88"
+}
